@@ -6,29 +6,61 @@
         <div class="section-title mb-1">用户管理</div>
         <div class="section-subtitle">维护员工账号、角色和部门归属</div>
     </div>
-    <button class="btn btn-primary" type="button" onclick="$('#userForm').toggle()">新增用户</button>
+    <button class="btn btn-primary" type="button" onclick="openUserModal()">新增用户</button>
 </div>
-<form id="userForm" class="form-panel card card-body mb-3" style="display:none;" onsubmit="saveUser();return false;">
-    <div class="form-row">
-        <input type="hidden" name="id" id="userId">
-        <div class="col"><input name="username" class="form-control" placeholder="登录账号"></div>
-        <div class="col"><input name="password" class="form-control" placeholder="初始密码"></div>
-        <div class="col"><input name="realName" class="form-control" placeholder="姓名"></div>
-        <div class="col">
-            <select name="deptId" class="form-control">
-                <option value="">所属部门</option>
-                <c:forEach items="${departments}" var="dept"><option value="${dept.id}">${dept.deptName}</option></c:forEach>
-            </select>
+
+<div class="modal fade" id="userModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" style="border-radius:16px; border:0;">
+            <div class="modal-header">
+                <h5 class="modal-title">新增用户</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="userForm" onsubmit="saveUser();return false;">
+                <div class="modal-body">
+                    <input type="hidden" name="id" id="userId">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>登录账号</label>
+                            <input name="username" class="form-control" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>初始密码</label>
+                            <input name="password" class="form-control" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>姓名</label>
+                            <input name="realName" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>所属部门</label>
+                            <select name="deptId" class="form-control">
+                                <option value="">请选择部门</option>
+                                <c:forEach items="${departments}" var="dept"><option value="${dept.id}">${dept.deptName}</option></c:forEach>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>角色</label>
+                            <select name="roleCode" class="form-control">
+                                <option value="EMPLOYEE">普通员工</option>
+                                <option value="ADMIN">管理员</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">取消</button>
+                    <button type="submit" class="btn btn-primary">保存用户</button>
+                </div>
+            </form>
         </div>
-        <div class="col">
-            <select name="roleCode" class="form-control">
-                <option value="EMPLOYEE">普通员工</option>
-                <option value="ADMIN">管理员</option>
-            </select>
-        </div>
-        <div class="col"><button class="btn btn-primary btn-block">保存用户</button></div>
     </div>
-</form>
+</div>
+
 <div class="table-wrap">
 <table id="userTable" class="table bg-white mb-0">
     <thead><tr><th>ID</th><th>账号</th><th>姓名</th><th>部门</th><th>职位</th><th>角色</th><th>操作</th></tr></thead>
@@ -42,8 +74,8 @@
             <td>${item.position}</td>
             <td>${item.roleCode}</td>
             <td>
-                <button class="btn btn-sm btn-outline-secondary" onclick="resetPassword('${item.id}')">重置密码</button>
-                <button class="btn btn-sm btn-outline-danger" onclick="deleteUser('${item.id}')">删除</button>
+                <button class="btn btn-sm btn-outline-secondary" type="button" onclick="resetPassword('${item.id}')">重置密码</button>
+                <button class="btn btn-sm btn-outline-danger" type="button" onclick="deleteUser('${item.id}')">删除</button>
             </td>
         </tr>
     </c:forEach>
@@ -52,10 +84,18 @@
 </div>
 <div id="userPager" class="mt-3"></div>
 <script>
+    function openUserModal() {
+        $('#userForm')[0].reset();
+        $('#userId').val('');
+        $('#userModal').modal('show');
+    }
     function saveUser() {
         $.post('${pageContext.request.contextPath}/user/save', $('#userForm').serialize(), function (res) {
             alert(res.msg);
-            if (res.code === 200) location.reload();
+            if (res.code === 200) {
+                $('#userModal').modal('hide');
+                location.reload();
+            }
         });
     }
     function deleteUser(id) {

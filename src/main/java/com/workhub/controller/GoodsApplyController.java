@@ -2,6 +2,7 @@ package com.workhub.controller;
 
 import com.workhub.common.ApiResponse;
 import com.workhub.entity.GoodsApply;
+import com.workhub.service.GoodsItemService;
 import com.workhub.entity.User;
 import com.workhub.service.AuthzService;
 import com.workhub.service.GoodsApplyService;
@@ -22,6 +23,8 @@ public class GoodsApplyController {
     @Resource
     private GoodsApplyService goodsApplyService;
     @Resource
+    private GoodsItemService goodsItemService;
+    @Resource
     private AuthzService authzService;
 
     @GetMapping("/list")
@@ -29,6 +32,7 @@ public class GoodsApplyController {
         User loginUser = SessionUtil.getLoginUser(session);
         boolean canApprove = authzService.isAdmin(loginUser) || authzService.isLeader(loginUser);
         model.addAttribute("records", canApprove ? goodsApplyService.list() : goodsApplyService.listByUserId(loginUser.getId()));
+        model.addAttribute("goodsItems", goodsItemService.list());
         model.addAttribute("loginUser", loginUser);
         model.addAttribute("canApprove", canApprove);
         return "goods/list";

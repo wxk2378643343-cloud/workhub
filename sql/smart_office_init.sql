@@ -1,10 +1,11 @@
-CREATE DATABASE IF NOT EXISTS smart_office_db DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+﻿CREATE DATABASE IF NOT EXISTS smart_office_db DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE smart_office_db;
 
 DROP TABLE IF EXISTS sys_user_role;
 DROP TABLE IF EXISTS sys_role;
 DROP TABLE IF EXISTS oa_meeting_apply;
 DROP TABLE IF EXISTS oa_meeting_room;
+DROP TABLE IF EXISTS oa_goods_item;
 DROP TABLE IF EXISTS oa_goods_apply;
 DROP TABLE IF EXISTS oa_report;
 DROP TABLE IF EXISTS oa_leave;
@@ -120,6 +121,18 @@ CREATE TABLE oa_goods_apply (
     update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+
+CREATE TABLE oa_goods_item (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    goods_name VARCHAR(100) NOT NULL,
+    unit VARCHAR(20),
+    stock INT NOT NULL DEFAULT 0,
+    status TINYINT NOT NULL DEFAULT 1,
+    remark VARCHAR(255),
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
 CREATE TABLE oa_meeting_room (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     room_name VARCHAR(100) NOT NULL,
@@ -149,20 +162,26 @@ CREATE TABLE oa_meeting_apply (
 );
 
 INSERT INTO sys_role(role_name, role_code, remark) VALUES
-('管理员', 'ADMIN', '系统管理员'),
-('普通员工', 'EMPLOYEE', '普通员工');
+('绠＄悊鍛?, 'ADMIN', '绯荤粺绠＄悊鍛?),
+('鏅€氬憳宸?, 'EMPLOYEE', '鏅€氬憳宸?);
 
 INSERT INTO sys_department(dept_name, description, status) VALUES
-('综合管理部', '行政与人事管理', 1),
-('技术部', '系统开发与维护', 1),
-('财务部', '财务管理', 1);
+('缁煎悎绠＄悊閮?, '琛屾斂涓庝汉浜嬬鐞?, 1),
+('鎶€鏈儴', '绯荤粺寮€鍙戜笌缁存姢', 1),
+('璐㈠姟閮?, '璐㈠姟绠＄悊', 1);
 
 INSERT INTO sys_user(username, password, real_name, gender, phone, email, dept_id, position, status) VALUES
-('admin', 'e10adc3949ba59abbe56e057f20f883e', '系统管理员', '男', '13800000000', 'admin@workhub.com', 1, '系统管理员', 1),
-('zhangsan', 'e10adc3949ba59abbe56e057f20f883e', '张三', '男', '13800000001', 'zhangsan@workhub.com', 2, '开发工程师', 1),
-('lisi', 'e10adc3949ba59abbe56e057f20f883e', '李四', '女', '13800000002', 'lisi@workhub.com', 3, '财务专员', 1);
+('admin', 'e10adc3949ba59abbe56e057f20f883e', '绯荤粺绠＄悊鍛?, '鐢?, '13800000000', 'admin@workhub.com', 1, '绯荤粺绠＄悊鍛?, 1),
+('zhangsan', 'e10adc3949ba59abbe56e057f20f883e', '寮犱笁', '鐢?, '13800000001', 'zhangsan@workhub.com', 2, '寮€鍙戝伐绋嬪笀', 1),
+('lisi', 'e10adc3949ba59abbe56e057f20f883e', '鏉庡洓', '濂?, '13800000002', 'lisi@workhub.com', 3, '璐㈠姟涓撳憳', 1);
 
 INSERT INTO sys_user_role(user_id, role_id) VALUES (1, 1), (2, 2), (3, 2);
 
 INSERT INTO oa_notice(title, content, publisher_id, is_top, status) VALUES
-('系统上线通知', '智慧办公系统基础版本已完成初始化。', 1, 1, 1);
+('绯荤粺涓婄嚎閫氱煡', '鏅烘収鍔炲叕绯荤粺鍩虹鐗堟湰宸插畬鎴愬垵濮嬪寲銆?, 1, 1, 1);
+
+INSERT INTO oa_goods_item(goods_name, unit, stock, status, remark) VALUES
+(''A4鎵撳嵃绾?', ''鍖?', 120, 1, ''甯哥敤鍔炲叕鑰楁潗''),
+(''涓€х瑪'', ''鐩?', 80, 1, ''0.5mm 榛戣壊''),
+(''璁功閽?', ''鐩?', 60, 1, ''24/6 閫氱敤瑙勬牸'');
+

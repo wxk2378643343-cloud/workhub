@@ -1,6 +1,7 @@
 package com.workhub.entity;
 
 import com.workhub.common.BaseEntity;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -11,7 +12,9 @@ public class MeetingApply extends BaseEntity {
     private String roomName;
     private String subject;
     private String content;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date startTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date endTime;
     private String participants;
     private Integer status;

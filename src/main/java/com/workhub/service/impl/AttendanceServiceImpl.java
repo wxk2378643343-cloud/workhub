@@ -42,11 +42,9 @@ public class AttendanceServiceImpl implements AttendanceService {
     @Override
     public void checkIn(Long userId) {
         Attendance today = attendanceMapper.findTodayByUserId(userId);
-        if (today != null && today.getCheckInTime() != null) {
-            throw new IllegalStateException("今天已经完成上班打卡");
-        }
         Date now = new Date();
         String inStatus = now.before(buildTime(now, 9, 0)) ? "正常" : "迟到";
+
         if (today == null) {
             Attendance attendance = new Attendance();
             attendance.setUserId(userId);
@@ -57,6 +55,7 @@ public class AttendanceServiceImpl implements AttendanceService {
             attendanceMapper.insert(attendance);
             return;
         }
+
         today.setCheckInTime(now);
         today.setCheckInStatus(inStatus);
         today.setDayStatus("正常".equals(inStatus) ? defaultDayStatus(today) : "迟到");
@@ -69,9 +68,7 @@ public class AttendanceServiceImpl implements AttendanceService {
         if (today == null || today.getCheckInTime() == null) {
             throw new IllegalStateException("请先完成上班打卡");
         }
-        if (today.getCheckOutTime() != null) {
-            throw new IllegalStateException("今天已经完成下班打卡");
-        }
+
         Date now = new Date();
         String outStatus = now.before(buildTime(now, 18, 0)) ? "早退" : "正常";
         today.setCheckOutTime(now);

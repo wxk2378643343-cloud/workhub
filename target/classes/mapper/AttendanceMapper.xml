@@ -21,7 +21,8 @@
         from oa_attendance a
         left join sys_user u on a.user_id = u.id
         where a.user_id = #{userId}
-          and a.attendance_date = curdate()
+          and date(a.attendance_date) = curdate()
+        order by a.id desc
         limit 1
     </select>
 

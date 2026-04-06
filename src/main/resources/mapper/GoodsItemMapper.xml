@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.workhub.mapper.GoodsItemMapper">
+    <select id="findAll" resultType="com.workhub.entity.GoodsItem">
+        select *
+        from oa_goods_item
+        order by id desc
+    </select>
+
+    <insert id="insert" parameterType="com.workhub.entity.GoodsItem" useGeneratedKeys="true" keyProperty="id">
+        insert into oa_goods_item(goods_name, unit, stock, status, remark)
+        values(#{goodsName}, #{unit}, #{stock}, #{status}, #{remark})
+    </insert>
+
+    <update id="update" parameterType="com.workhub.entity.GoodsItem">
+        update oa_goods_item
+        set goods_name = #{goodsName},
+            unit = #{unit},
+            stock = #{stock},
+            status = #{status},
+            remark = #{remark}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        delete from oa_goods_item where id = #{id}
+    </delete>
+</mapper>

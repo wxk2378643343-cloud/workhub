@@ -51,8 +51,10 @@ public class MeetingController {
 
     @PostMapping("/apply/save")
     @ResponseBody
-    public ApiResponse<String> saveApply(MeetingApply meetingApply) {
+    public ApiResponse<String> saveApply(MeetingApply meetingApply, HttpSession session) {
         try {
+            User loginUser = SessionUtil.getLoginUser(session);
+            meetingApply.setUserId(loginUser.getId());
             meetingApplyService.save(meetingApply);
             return ApiResponse.success("提交成功");
         } catch (IllegalArgumentException e) {

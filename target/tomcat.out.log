@@ -1,5 +1,0 @@
-2026-04-02 21:09:56 [INFO] org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
-2026-04-02 21:09:58 [INFO] org.springframework.web.context.ContextLoader - Root WebApplicationContext initialized in 1424 ms
-2026-04-02 21:09:59 [INFO] org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'springmvc'
-2026-04-02 21:10:01 [INFO] org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1752 ms
-Smart Office started: http://localhost:8080/login.jsp
