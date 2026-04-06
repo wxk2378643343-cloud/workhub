@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.workhub.mapper.MeetingApplyMapper">
+    <select id="findAll" resultType="com.workhub.entity.MeetingApply">
+        select m.*, u.real_name as user_name, r.room_name
+        from oa_meeting_apply m
+        left join sys_user u on m.user_id = u.id
+        left join oa_meeting_room r on m.room_id = r.id
+        order by m.id desc
+    </select>
+
+    <select id="findByUserId" resultType="com.workhub.entity.MeetingApply">
+        select m.*, u.real_name as user_name, r.room_name
+        from oa_meeting_apply m
+        left join sys_user u on m.user_id = u.id
+        left join oa_meeting_room r on m.room_id = r.id
+        where m.user_id = #{userId}
+        order by m.id desc
+    </select>
+
+    <insert id="insert" parameterType="com.workhub.entity.MeetingApply" useGeneratedKeys="true" keyProperty="id">
+        insert into oa_meeting_apply(user_id, room_id, subject, content, start_time, end_time, participants, status)
+        values(#{userId}, #{roomId}, #{subject}, #{content}, #{startTime}, #{endTime}, #{participants}, #{status})
+    </insert>
+
+    <update id="updateStatus" parameterType="com.workhub.entity.MeetingApply">
+        update oa_meeting_apply set status = #{status} where id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        delete from oa_meeting_apply where id = #{id}
+    </delete>
+
+    <select id="countConflict" resultType="int">
+        select count(1)
+        from oa_meeting_apply
+        where room_id = #{roomId}
+          and status in (0, 1)
+          and #{startTime} <![CDATA[ < ]]> end_time
+          and #{endTime} <![CDATA[ > ]]> start_time
+    </select>
+</mapper>

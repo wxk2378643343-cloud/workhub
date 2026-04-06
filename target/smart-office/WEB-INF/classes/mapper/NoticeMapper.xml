@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.workhub.mapper.NoticeMapper">
+    <select id="findAll" resultType="com.workhub.entity.Notice">
+        select n.*, u.real_name as publisher_name
+        from oa_notice n
+        left join sys_user u on n.publisher_id = u.id
+        order by n.is_top desc, n.publish_time desc
+    </select>
+
+    <insert id="insert" parameterType="com.workhub.entity.Notice" useGeneratedKeys="true" keyProperty="id">
+        insert into oa_notice(title, content, publisher_id, is_top, status, publish_time)
+        values(#{title}, #{content}, #{publisherId}, #{isTop}, #{status}, #{publishTime})
+    </insert>
+
+    <update id="update" parameterType="com.workhub.entity.Notice">
+        update oa_notice
+        set title = #{title},
+            content = #{content},
+            is_top = #{isTop},
+            status = #{status},
+            publish_time = #{publishTime}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        delete from oa_notice where id = #{id}
+    </delete>
+</mapper>
