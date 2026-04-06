@@ -1,5 +1,4 @@
 D:\project\workhub\src\main\java\com\workhub\service\impl\MeetingRoomServiceImpl.java
-D:\project\workhub\src\main\java\com\workhub\EmbeddedTomcatLauncher.java
 D:\project\workhub\src\main\java\com\workhub\service\impl\NoticeServiceImpl.java
 D:\project\workhub\src\main\java\com\workhub\controller\HomeController.java
 D:\project\workhub\src\main\java\com\workhub\controller\UserController.java
@@ -12,9 +11,11 @@ D:\project\workhub\src\main\java\com\workhub\mapper\MeetingRoomMapper.java
 D:\project\workhub\src\main\java\com\workhub\service\AuthzService.java
 D:\project\workhub\src\main\java\com\workhub\controller\AuthController.java
 D:\project\workhub\src\main\java\com\workhub\service\impl\LeaveApplyServiceImpl.java
+D:\project\workhub\src\main\java\com\workhub\mapper\GoodsItemMapper.java
 D:\project\workhub\src\main\java\com\workhub\service\ReportService.java
 D:\project\workhub\src\main\java\com\workhub\controller\MeetingController.java
 D:\project\workhub\src\main\java\com\workhub\controller\NoticeController.java
+D:\project\workhub\src\main\java\com\workhub\util\DbSchemaInitializer.java
 D:\project\workhub\src\main\java\com\workhub\service\AuthService.java
 D:\project\workhub\src\main\java\com\workhub\service\AttendanceService.java
 D:\project\workhub\src\main\java\com\workhub\common\ApiResponse.java
@@ -32,12 +33,15 @@ D:\project\workhub\src\main\java\com\workhub\entity\Attendance.java
 D:\project\workhub\src\main\java\com\workhub\service\impl\AuthServiceImpl.java
 D:\project\workhub\src\main\java\com\workhub\entity\MeetingRoom.java
 D:\project\workhub\src\main\java\com\workhub\mapper\NoticeMapper.java
+D:\project\workhub\src\main\java\com\workhub\service\GoodsItemService.java
 D:\project\workhub\src\main\java\com\workhub\entity\Department.java
 D:\project\workhub\src\main\java\com\workhub\entity\LeaveApply.java
 D:\project\workhub\src\main\java\com\workhub\controller\LeaveApplyController.java
 D:\project\workhub\src\main\java\com\workhub\mapper\MeetingApplyMapper.java
+D:\project\workhub\src\main\java\com\workhub\entity\GoodsItem.java
 D:\project\workhub\src\main\java\com\workhub\entity\MeetingApply.java
 D:\project\workhub\src\main\java\com\workhub\service\MeetingRoomService.java
+D:\project\workhub\src\main\java\com\workhub\controller\GoodsItemController.java
 D:\project\workhub\src\main\java\com\workhub\service\impl\GoodsApplyServiceImpl.java
 D:\project\workhub\src\main\java\com\workhub\util\Md5Util.java
 D:\project\workhub\src\main\java\com\workhub\service\LeaveApplyService.java
@@ -56,3 +60,4 @@ D:\project\workhub\src\main\java\com\workhub\interceptor\LoginInterceptor.java
 D:\project\workhub\src\main\java\com\workhub\mapper\GoodsApplyMapper.java
 D:\project\workhub\src\main\java\com\workhub\service\impl\ReportServiceImpl.java
 D:\project\workhub\src\main\java\com\workhub\service\impl\AttendanceServiceImpl.java
+D:\project\workhub\src\main\java\com\workhub\service\impl\GoodsItemServiceImpl.java

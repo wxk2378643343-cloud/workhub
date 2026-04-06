@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+﻿<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/jsp/common/layout-top.jsp" %>
 
@@ -45,7 +45,7 @@
                                 data-location="<c:out value='${item.location}'/>"
                                 data-equipment="<c:out value='${item.equipment}'/>"
                                 data-status="${item.status}"
-                                onclick="openEditModal(this)">修改</button>
+                                onclick="openEditModal(this)">编辑</button>
                         <button class="btn btn-sm btn-outline-danger" type="button" onclick="deleteRoom('${item.id}')">删除</button>
                     </td>
                 </c:if>
@@ -117,7 +117,7 @@
 
     function openEditModal(btn) {
         var $btn = $(btn);
-        $('#roomModalTitle').text('修改会议室');
+        $('#roomModalTitle').text('编辑会议室');
         $('#roomId').val($btn.data('id'));
         $('#roomForm input[name=roomName]').val($btn.data('roomName'));
         $('#roomForm input[name=capacity]').val($btn.data('capacity'));

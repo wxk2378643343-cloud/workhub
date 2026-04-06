@@ -16,10 +16,12 @@
 
     <update id="update" parameterType="com.workhub.entity.Department">
         update sys_department
-        set dept_name = #{deptName},
-            leader_id = #{leaderId},
-            description = #{description},
-            status = #{status}
+        <set>
+            <if test="deptName != null and deptName != ''">dept_name = #{deptName},</if>
+            <if test="leaderId != null">leader_id = #{leaderId},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="status != null">status = #{status},</if>
+        </set>
         where id = #{id}
     </update>
 

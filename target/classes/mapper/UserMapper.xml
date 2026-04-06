@@ -45,13 +45,15 @@
 
     <update id="update" parameterType="com.workhub.entity.User">
         update sys_user
-        set real_name = #{realName},
-            gender = #{gender},
-            phone = #{phone},
-            email = #{email},
-            dept_id = #{deptId},
-            position = #{position},
-            status = #{status}
+        <set>
+            <if test="realName != null and realName != ''">real_name = #{realName},</if>
+            <if test="gender != null and gender != ''">gender = #{gender},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="email != null and email != ''">email = #{email},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="position != null and position != ''">position = #{position},</if>
+            <if test="status != null">status = #{status},</if>
+        </set>
         where id = #{id}
     </update>
 

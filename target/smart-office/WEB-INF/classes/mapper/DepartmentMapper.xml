@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.workhub.mapper.DepartmentMapper">
+    <select id="findAll" resultType="com.workhub.entity.Department">
+        select * from sys_department order by id desc
+    </select>
+
+    <select id="findById" resultType="com.workhub.entity.Department">
+        select * from sys_department where id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.workhub.entity.Department" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_department(dept_name, leader_id, description, status)
+        values(#{deptName}, #{leaderId}, #{description}, #{status})
+    </insert>
+
+    <update id="update" parameterType="com.workhub.entity.Department">
+        update sys_department
+        <set>
+            <if test="deptName != null and deptName != ''">dept_name = #{deptName},</if>
+            <if test="leaderId != null">leader_id = #{leaderId},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="status != null">status = #{status},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        delete from sys_department where id = #{id}
+    </delete>
+</mapper>
