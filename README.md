@@ -60,3 +60,9 @@ Dockerfile 构建 WAR 并部署到 Tomcat 9。Compose 用独立数据库用户�
 - [src/main/webapp](src/main/webapp/) 是 JSP 页面和静态资源。
 - [src/main/resources](src/main/resources/) 是 Spring、MyBatis 和数据库连接配置。
 - [sql/smart_office_init.sql](sql/smart_office_init.sql) 用于建立演示数据库和初始数据。
+
+---
+
+## 📄 开源许可证
+
+本项目基于 [MIT License](LICENSE) 开源，详见根目录 [LICENSE](LICENSE) 文件。
